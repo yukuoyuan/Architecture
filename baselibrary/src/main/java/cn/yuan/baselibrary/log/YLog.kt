@@ -123,9 +123,28 @@ object YLog {
             return
         }
         val stringBuilder = StringBuilder()
+
+        /**
+         * 是否包含线程信息
+         */
+        if (config.includeThread()) {
+            val threadInfo = YLogConfig.yThreadFormatter.format(Thread.currentThread())
+            stringBuilder.append(threadInfo).append("\n")
+        }
+        /**
+         * 是否打印堆栈信息
+         */
+        if (config.stackTraceDepth() > 0) {
+            val stackTraceInfo = YLogConfig.yStackTraceFormatter.format(Throwable().stackTrace)
+            stringBuilder.append(stackTraceInfo).append("\n")
+        }
         val body = parseBody(contents)
         stringBuilder.append(body)
-        Log.println(type, tag, body)
+
+        /**
+         * 获取打印器进行打印
+         */
+
     }
 
     /**
