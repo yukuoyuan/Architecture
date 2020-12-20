@@ -69,7 +69,7 @@ abstract class YLogConfig {
      * 打印器
      * @return Array<YLogPrinter>?
      */
-    open fun printers(): Array<YLogPrinter>? {
+    open fun printers(): ArrayList<YLogPrinter>? {
         return null
     }
 

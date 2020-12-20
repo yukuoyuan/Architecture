@@ -15,5 +15,5 @@ interface YLogPrinter {
      * @param tag String 标签
      * @param printString String 打印的内容
      */
-    fun print(config: YLogConfig, @YLogType.TYPE type: Int, tag: String, printString: String)
+    open fun print(config: YLogConfig, @YLogType.TYPE type: Int, tag: String, printString: String)
 }

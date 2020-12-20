@@ -11,7 +11,7 @@ import android.util.Log
  */
 class YConsolePrinter : YLogPrinter {
 
-    override fun print(config: YLogConfig, type: Int, tag: String, printString: String) {
+    open override fun print(config: YLogConfig, type: Int, tag: String, printString: String) {
         /**
          * 总长度
          */

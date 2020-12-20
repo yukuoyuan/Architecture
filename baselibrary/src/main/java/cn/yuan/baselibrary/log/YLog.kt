@@ -144,7 +144,17 @@ object YLog {
         /**
          * 获取打印器进行打印
          */
-
+        val printers: ArrayList<YLogPrinter>? = if (config.printers().isNullOrEmpty()) {
+            YLogManager.mPrinters
+        } else {
+            config.printers()
+        }
+        if (printers.isNullOrEmpty()) {
+            return
+        }
+        for (printer in printers) {
+            printer.print(config, type, tag, stringBuilder.toString())
+        }
     }
 
     /**

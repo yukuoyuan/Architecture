@@ -1,5 +1,7 @@
 package cn.yuan.baselibrary.log
 
+import kotlin.collections.ArrayList
+
 
 /**
  * Created on 12/19/20
@@ -17,11 +19,17 @@ class YLogManager private constructor(var config: YLogConfig) {
         lateinit var instance: YLogManager
 
         /**
+         * 打印器
+         */
+        var mPrinters = ArrayList<YLogPrinter>()
+
+        /**
          * 只可以 从这里进行初始化
          * @param config YLogConfig
          */
-        fun init(config: YLogConfig) {
+        fun init(config: YLogConfig, vararg printers: YLogPrinter) {
             instance = YLogManager(config)
+            mPrinters.addAll(printers)
         }
     }
 
