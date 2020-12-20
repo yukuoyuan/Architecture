@@ -1,6 +1,5 @@
 package cn.yuan.baselibrary.log
 
-import android.util.Log
 import java.lang.StringBuilder
 
 
@@ -138,7 +137,7 @@ object YLog {
             val stackTraceInfo = YLogConfig.yStackTraceFormatter.format(Throwable().stackTrace)
             stringBuilder.append(stackTraceInfo).append("\n")
         }
-        val body = parseBody(contents)
+        val body = parseBody(contents, config)
         stringBuilder.append(body)
 
         /**
@@ -161,7 +160,14 @@ object YLog {
      * 转换传递的数据为一个字符串
      * @param contents Array<out Any>
      */
-    private fun parseBody(vararg contents: Any): String {
+    private fun parseBody(contents: Array<out Any>, config: YLogConfig): String {
+        if (config.injectJsonParser() != null) {
+            /**
+             * 需要解析为json
+             */
+            return config.injectJsonParser()!!.toJson(contents)
+        }
+
         val stringBuilder = StringBuilder()
         for (content in contents) {
             stringBuilder.append(content.toString()).append(";")
