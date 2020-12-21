@@ -23,7 +23,7 @@ class YConsolePrinter : YLogPrinter {
         val countLine = length / YLogConfig.LINE_MAX_LEN
         if (countLine > 0) {
             var index = 0
-            for (i in 0..countLine) {
+            for (i in 0 until countLine) {
                 Log.println(
                     type,
                     tag,

@@ -21,12 +21,12 @@ class YStackTraceFormatter : YLogFormatter<Array<StackTraceElement>> {
             }
             else -> {
                 val stringBuilder = StringBuilder()
-                for (i in 0..data.size) {
+                for (i in data.indices) {
                     if (i == 0) {
                         stringBuilder.append("stackTrace: \n")
                     }
                     when {
-                        i != data.size - 1 -> {
+                        i != (data.size - 1) -> {
                             stringBuilder.append("\t|- ")
                             stringBuilder.append(data[i].toString())
                             stringBuilder.append("\n")
