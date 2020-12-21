@@ -11,6 +11,15 @@ import java.lang.StringBuilder
  */
 object YLog {
     /**
+     * 包名
+     */
+    private val Y_LOG_PACKAGE_NAME = {
+        val className = YLog.javaClass.name
+        className.substring(0, className.lastIndexOf(".") + 1)
+    }
+
+
+    /**
      * 可以打印v类型的日志(不带tag)
      * @param contents Array<out Any>
      */
@@ -134,7 +143,13 @@ object YLog {
          * 是否打印堆栈信息
          */
         if (config.stackTraceDepth() > 0) {
-            val stackTraceInfo = YLogConfig.yStackTraceFormatter.format(Throwable().stackTrace)
+            val stackTraceInfo = YLogConfig.yStackTraceFormatter.format(
+                YStackTraceUtils.getClipRealStackTrace(
+                    Throwable().stackTrace,
+                    Y_LOG_PACKAGE_NAME(),
+                    config.stackTraceDepth()
+                )
+            )
             stringBuilder.append(stackTraceInfo).append("\n")
         }
         val body = parseBody(contents, config)
